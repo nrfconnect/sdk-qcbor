@@ -2624,7 +2624,7 @@ QCBORError QCBORDecode_PartialFinish(QCBORDecodeContext *pMe, size_t *puConsumed
       *puConsumed = pMe->InBuf.cursor;
    }
 
-   QCBORError uReturn = pMe->uLastError;
+   QCBORError uReturn = (QCBORError)pMe->uLastError;
 
    if(uReturn != QCBOR_SUCCESS) {
       goto Done;
@@ -3126,7 +3126,7 @@ MapSearch(QCBORDecodeContext *pMe,
    uint64_t   uFoundItemBitMap = 0;
 
    if(pMe->uLastError != QCBOR_SUCCESS) {
-      uReturn = pMe->uLastError;
+      uReturn = (QCBORError)pMe->uLastError;
       goto Done2;
    }
 
@@ -3796,7 +3796,7 @@ InternalEnterBstrWrapped(QCBORDecodeContext *pMe,
 
    if(pMe->uLastError != QCBOR_SUCCESS) {
       /* Already in error state; do nothing. */
-      return pMe->uLastError;
+      return (QCBORError)pMe->uLastError;
    }
 
    QCBORError uError;
